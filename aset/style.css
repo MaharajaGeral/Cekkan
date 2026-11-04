@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F3F9FD 0%, #DCEFFC 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  right: -80px;
+  bottom: -60px;
+  width: 480px;
+  height: 480px;
+  background: url('aset/logo_cekkan.png') no-repeat center / contain;
+  opacity: 0.07;
+  z-index: -1;
+  pointer-events: none;
+}
+
+header {
+  height: 70px;
+  padding: 0 40px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
+}
+
+.logo {
+  height: 46px;
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+}
+
+nav a {
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #0B63E8;
+}
+
+/* isi */
+main {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 0 40px;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #4B5563;
+}
+
+.breadcrumb a {
+  color: #0B4FB3;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb [aria-current="page"] {
+  font-weight: 600;
+  color: #0B3D91;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: 600;
+  color: #0B3D91;
+  margin-top: 28px;
+}
+
+.sub {
+  font-size: 16px;
+  color: #374151;
+  margin: 6px 0 28px;
+}
+
+/* kartu */
+.daftar-kartu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.kartu {
+  position: relative;
+  min-height: 130px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  color: black;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.kartu:hover {
+  transform: translateY(-4px);
+  border-color: #0B63E8;
+  box-shadow: 0 10px 22px rgba(11, 99, 232, 0.2);
+}
+
+/* panah kecil di pojok kartu */
+.kartu::after {
+  content: "→";
+  position: absolute;
+  right: 20px;
+  bottom: 14px;
+  font-size: 22px;
+  color: #0B63E8;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.kartu:hover::after {
+  opacity: 1;
+}
+
+.judul {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.judul img {
+  height: 32px;
+}
+
+.judul h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0B63E8;
+}
+
+.kartu p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #1F2937;
+  padding-right: 30px;
+}
+
+/* tautan ke simulasi dan panduan */
+.bantuan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 40px;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid #C5DAEE;
+}
+
+.bantuan a {
+  font-size: 15px;
+  color: #374151;
+  text-decoration: none;
+}
+
+.bantuan strong {
+  color: #0B4FB3;
+  text-decoration: underline;
+}
+
+/* tiga poin kepercayaan */
+.jaminan {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 22px;
+}
+
+.jaminan li {
+  font-size: 14px;
+  color: #1F2937;
+}
+
+.jaminan li::before {
+  content: "✓ ";
+  color: #067647;
+  font-weight: 800;
+}
+
+/* footer */
+footer {
+  padding: 20px 40px 28px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* layar kecil */
+@media (max-width: 700px) {
+  header {
+    padding: 0 20px;
+  }
+
+  .daftar-kartu {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+}
