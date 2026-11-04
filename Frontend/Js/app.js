@@ -29,6 +29,63 @@ function toast(msg) {
    ========================================================== */
 const pages = $$(".page");
 
+// nama tiap halaman untuk breadcrumb
+const NAMA_HALAMAN = {
+  "/periksa": "Periksa",
+  "/periksa/pesan": "Pesan Loker",
+  "/periksa/tautan": "Tautan Lowongan",
+  "/periksa/dokumen": "Dokumen Persyaratan",
+  "/periksa/kontrak": "Kontrak Kerja",
+  "/simulasi": "Simulasi",
+  "/simulasi/lowongan": "Lowongan Kerja",
+  "/tentang": "Tentang",
+  "/panduan": "Panduan",
+  "/faq": "FAQ"
+};
+
+function tampilkanBreadcrumb(path, page) {
+  const nav = $("#breadcrumb");
+  nav.replaceChildren();
+
+  // beranda tidak punya breadcrumb
+  if (path === "/") {
+    nav.hidden = true;
+    return;
+  }
+
+  // susun urutan: Beranda, lalu tiap tingkat alamat
+  const urutan = [{ nama: "Beranda", alamat: "/" }];
+  const bagian = path.split("/").filter(Boolean);
+  let alamat = "";
+  for (const b of bagian) {
+    alamat += "/" + b;
+    urutan.push({ nama: NAMA_HALAMAN[alamat], alamat: alamat });
+  }
+
+  urutan.forEach((item, i) => {
+    if (i > 0) {
+      const pemisah = el("span", "bc-sep", "›");
+      pemisah.setAttribute("aria-hidden", "true");
+      nav.append(pemisah);
+    }
+
+    if (i === urutan.length - 1) {
+      // halaman sekarang: bukan tautan
+      const sekarang = el("span", "bc-current", item.nama);
+      sekarang.setAttribute("aria-current", "page");
+      nav.append(sekarang);
+    } else {
+      const a = el("a", "", item.nama);
+      a.href = "#" + item.alamat;
+      nav.append(a);
+    }
+  });
+
+  // halaman tanpa tombol back (Tentang, Panduan, FAQ) -> geser ke kiri
+  nav.classList.toggle("no-back", !page.querySelector(".back-btn"));
+  nav.hidden = false;
+}
+
 function route() {
   const path = location.hash.replace(/^#/, "") || "/";
   const page = pages.find(p => p.dataset.route === path) || pages.find(p => p.dataset.route === "/");
@@ -37,6 +94,7 @@ function route() {
   pages.forEach(p => p.classList.toggle("active", p === page));
   $$("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === current));
   window.scrollTo(0, 0);
+  tampilkanBreadcrumb(current, page);
 
   // masuk ke halaman simulasi -> mulai ulang
   if (page.dataset.scenario) startSimulation(page.dataset.scenario);

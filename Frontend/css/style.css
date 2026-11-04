@@ -18,14 +18,16 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.5}
+body{
+  font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.5}
 img{max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 main{flex:1}
 
 /* ---------- Navbar ---------- */
-.navbar{position:sticky;top:0;z-index:50;height:var(--nav-h);background:#fff;border-radius:0 0 22px 22px;box-shadow:0 6px 16px rgba(0,50,120,.25);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.navbar{position:sticky;top:0;
+  z-index:50;height:var(--nav-h);background:#fff;border-radius:0 0 22px 22px;box-shadow:0 6px 16px rgba(0,50,120,.25);display:flex;align-items:center;justify-content:space-between;padding:0 22px}
 .brand img{height:58px;display:block}
 .nav-links{display:flex;gap:36px;font-family:'Jost',sans-serif;font-size:1.2rem;padding-right:12px}
 .nav-links a{position:relative;padding:4px 2px}
@@ -43,6 +45,17 @@ main{flex:1}
 .back-btn{position:absolute;left:28px;top:24px;width:48px;height:48px;border-radius:50%;background:var(--blue);box-shadow:var(--shadow);display:grid;place-items:center;z-index:5;transition:transform .15s}
 .back-btn:hover{transform:scale(1.07)}
 .back-btn svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Breadcrumb ---------- */
+main{position:relative}
+
+.breadcrumb{position:absolute;left:90px;top:24px;height:48px;z-index:5;display:flex;align-items:center;gap:8px;font-size:.92rem;max-width:calc(100% - 106px)}
+.breadcrumb[hidden]{display:none}
+.breadcrumb.no-back{left:28px}
+.breadcrumb a{color:var(--blue-dark)}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .bc-sep{color:var(--muted)}
+.breadcrumb .bc-current{color:var(--blue-title);font-weight:600}
 
 /* ---------- Beranda ---------- */
 .page-home{background:linear-gradient(#cdefff 0%,#eefaff 45%,#fff 80%);overflow:hidden;padding-bottom:60px}
@@ -202,6 +215,9 @@ textarea::placeholder,.text-input::placeholder{color:#aaa}
   .home-watermark{opacity:.2;right:-10%;width:70vw}
 }
 @media (max-width:640px){
+  .breadcrumb{font-size:.85rem}
+  .breadcrumb:not(.no-back) a:first-child,
+  .breadcrumb:not(.no-back) a:first-child + .bc-sep{display:none}
   :root{--nav-h:68px}
   .brand img{height:44px}
   .nav-links{gap:16px;font-size:1rem;padding-right:0}
