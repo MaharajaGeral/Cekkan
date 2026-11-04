@@ -1,77 +1,317 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cekkan - Cek Dulu Sebelum Lamar</title>
-    <!-- Memanggil file CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Font Inter dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cekkan – Cek Dulu Sebelum Lamar</title>
+
+  <!-- ASET: ikon tab browser (opsional) -->
+  <link rel="icon" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo-container">
-            <img src="Logo_Cekkan.png" alt="Logo Cekkan" class="logo-img">
+<!-- ============ NAVBAR (tampil di semua halaman) ============ -->
+<header class="navbar">
+  <a href="#/" class="brand" aria-label="Cekkan – ke beranda">
+    <!-- ASET: logo navbar -->
+    <img src="assets/img/logo.png" alt="Cekkan">
+  </a>
+  <nav class="nav-links" aria-label="Menu utama">
+    <a href="#/tentang" data-nav="/tentang">Tentang</a>
+    <a href="#/panduan" data-nav="/panduan">Panduan</a>
+    <a href="#/faq" data-nav="/faq">FAQ</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ BERANDA ============ -->
+  <section class="page page-home" data-route="/">
+    <!-- ASET: logo besar transparan di latar kanan -->
+    <img class="home-watermark" src="assets/img/logo-watermark.png" alt="" aria-hidden="true">
+    <div class="container">
+      <h1 class="home-title">Selamat Datang di Cekkan</h1>
+      <h2 class="home-sub">CEK DULU SEBELUM LAMAR</h2>
+      <p class="home-text">Kenali Risiko Penipuan dalam Proses Rekrutmen.</p>
+      <p class="home-text">Pelajari modus penipuan melalui simulasi interaktif, atau periksa pesan rekrutmen, tautan lowongan, persyaratan dokumen, dan kontrak kerja untuk mengenali indikasi risiko sebelum mengambil keputusan.</p>
+      <p class="home-text">Pilih ikon fitur di bawah dan klik untuk memulai!</p>
+
+      <div class="feature-cards">
+        <a class="feature-card" href="#/periksa">
+          <div class="feature-head">
+            <!-- ASET: ikon Periksa -->
+            <img src="assets/img/icon-periksa.png" alt="">
+            <h3>Periksa</h3>
+          </div>
+          <p>Periksa Pesan, Link, syarat/Dokumen, dan Kontrak kerja</p>
+        </a>
+        <a class="feature-card" href="#/simulasi">
+          <div class="feature-head">
+            <!-- ASET: ikon Simulasi -->
+            <img src="assets/img/icon-simulasi.png" alt="">
+            <h3>Simulasi</h3>
+          </div>
+          <p>Belajar mengenali ciri-ciri loker palsu dengan skenario interaktif</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU PERIKSA ============ -->
+  <section class="page page-menu" data-route="/periksa">
+    <a class="back-btn" href="#/" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="container wide">
+      <h1 class="menu-title">Apa yang ingin kamu periksa?</h1>
+      <div class="menu-grid">
+        <a class="menu-card" href="#/periksa/pesan">
+          <div class="menu-head"><img src="assets/img/icon-pesan.png" alt=""><h3>Pesan Loker</h3></div>
+          <p>Periksa pesan tawaran pekerjaan yang mencurigakan.</p>
+        </a>
+        <a class="menu-card" href="#/periksa/tautan">
+          <div class="menu-head"><img src="assets/img/icon-tautan.png" alt=""><h3>Tautan Lowongan</h3></div>
+          <p>Periksa tautan pendaftaran atau formulir kerja.</p>
+        </a>
+        <a class="menu-card" href="#/periksa/dokumen">
+          <div class="menu-head"><img src="assets/img/icon-dokumen.png" alt=""><h3>Dokumen Persyaratan</h3></div>
+          <p>Periksa syarat dan dokumen yang diminta.</p>
+        </a>
+        <a class="menu-card" href="#/periksa/kontrak">
+          <div class="menu-head"><img src="assets/img/icon-kontrak.png" alt=""><h3>Kontrak Kerja</h3></div>
+          <p>Periksa klausul kontrak sebelum tanda tangan.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PERIKSA: PESAN LOKER ============ -->
+  <section class="page page-check" data-route="/periksa/pesan" data-check="pesan">
+    <a class="back-btn" href="#/periksa" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="check-layout">
+      <div class="check-main">
+        <h1 class="check-title">Periksa Pesan Loker</h1>
+        <p class="check-desc">Salin dan tempelkan pesan tawaran pekerjaan, untuk mengidentifikasi tanda-tanda penipuan dan sejenisnya.</p>
+        <div class="input-card">
+          <label class="input-label" for="in-pesan">Pesan yang akan diperiksa</label>
+          <div class="counter"><span class="js-count">0</span>/10000</div>
+          <textarea id="in-pesan" class="js-input" maxlength="10000" rows="8"
+            placeholder="Contoh: “Buka loker Junior Programmer. Gaji 15 juta/bulan tanpa pengalaman, bekerja secara remote, dan jam kerja hanya 1 jam/hari . Transfer biaya seragam Rp1.500.000 hari ini, kuota terbatas. Kunjungi http:xxx untuk konfirmasi."></textarea>
+          <p class="field-error" hidden></p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary js-submit">Periksa Pesan</button>
+            <button type="button" class="btn btn-outline js-sample">Coba Contoh Pesan</button>
+          </div>
         </div>
-        
-        <div class="nav-menu">
-            <a href="#">Tentang</a>
-            <a href="#">Panduan</a>
-            <a href="#">FAQ</a>
+      </div>
+      <aside class="result-card" aria-live="polite">
+        <h3>Hasil Pemeriksaan</h3>
+        <div class="result-body"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ PERIKSA: TAUTAN LOWONGAN ============ -->
+  <!-- Halaman ini belum ada isinya di Figma: dibuat mengikuti pola halaman Pesan Loker -->
+  <section class="page page-check" data-route="/periksa/tautan" data-check="tautan">
+    <a class="back-btn" href="#/periksa" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="check-layout">
+      <div class="check-main">
+        <h1 class="check-title">Periksa Tautan Lowongan</h1>
+        <p class="check-desc">Tempelkan tautan pendaftaran atau formulir kerja untuk melihat kejanggalan pada alamatnya. Jangan buka tautan yang belum kamu yakini.</p>
+        <div class="input-card">
+          <label class="input-label" for="in-tautan">Tautan yang akan diperiksa</label>
+          <input id="in-tautan" class="js-input text-input" type="text" inputmode="url" maxlength="2000" placeholder="Contoh: https://contoh-perusahaan.com/karir">
+          <p class="field-error" hidden></p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary js-submit">Periksa Tautan</button>
+            <button type="button" class="btn btn-outline js-sample">Coba Contoh Tautan</button>
+          </div>
         </div>
-    </nav>
+      </div>
+      <aside class="result-card" aria-live="polite">
+        <h3>Hasil Pemeriksaan</h3>
+        <div class="result-body"></div>
+      </aside>
+    </div>
+  </section>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Background Graphic (Watermark Check/C) -->
-        <div class="bg-graphic">
-            <svg width="500" height="500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M160 100C160 133.137 133.137 160 100 160C66.8629 160 40 133.137 40 100C40 66.8629 66.8629 40 100 40" stroke="#dbeafe" stroke-width="30" stroke-linecap="round"/>
-                <path d="M70 100L95 125L150 70" stroke="#dbeafe" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+  <!-- ============ PERIKSA: DOKUMEN PERSYARATAN ============ -->
+  <section class="page page-check" data-route="/periksa/dokumen" data-check="dokumen">
+    <a class="back-btn" href="#/periksa" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="check-layout">
+      <div class="check-main">
+        <h1 class="check-title">Periksa Dokumen Persyaratan</h1>
+        <p class="check-desc">Tulis daftar dokumen dan persyaratan yang diminta pemberi lowongan, satu per baris. Kami bantu tandai mana yang janggal.</p>
+        <div class="input-card">
+          <label class="input-label" for="in-dokumen">Daftar dokumen &amp; persyaratan</label>
+          <div class="counter"><span class="js-count">0</span>/5000</div>
+          <textarea id="in-dokumen" class="js-input" maxlength="5000" rows="8"
+            placeholder="Contoh:&#10;CV&#10;Fotokopi KTP&#10;Foto selfie sambil memegang KTP&#10;Nomor rekening dan PIN ATM&#10;Biaya administrasi Rp300.000"></textarea>
+          <p class="field-error" hidden></p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary js-submit">Periksa Persyaratan</button>
+            <button type="button" class="btn btn-outline js-sample">Coba Contoh Daftar</button>
+          </div>
         </div>
+      </div>
+      <aside class="result-card" aria-live="polite">
+        <h3>Hasil Pemeriksaan</h3>
+        <div class="result-body"></div>
+      </aside>
+    </div>
+  </section>
 
-        <div class="container">
-            <h1 class="main-title">Selamat Datang di Cekkan</h1>
-
-            <div class="content-wrapper">
-                <h2 class="subtitle">CEK DULU SEBELUM LAMAR</h2>
-                
-                <div class="description">
-                    <p>Kenali Risiko Penipuan dalam Proses Rekrutmen.</p>
-                    <p>Pelajari modus penipuan melalui simulasi interaktif, atau periksa pesan rekrutmen, tautan lowongan, persyaratan dokumen, dan kontrak kerja untuk mengenali indikasi risiko sebelum mengambil keputusan.</p>
-                    <p>Pilih ikon fitur di bawah dan klik untuk memulai!</p>
-                </div>
-
-                <div class="cards-container">
-                    <!-- Card 1: Periksa -->
-                    <button class="feature-card">
-                        <div class="card-header">
-                            <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                            </svg>
-                            <h3>Periksa</h3>
-                        </div>
-                        <p class="card-text">Periksa Pesan, Link, syarat/Dokumen, dan Kontrak kerja</p>
-                    </button>
-
-                    <!-- Card 2: Simulasi -->
-                    <button class="feature-card">
-                        <div class="card-header">
-                            <svg class="card-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                            </svg>
-                            <h3>Simulasi</h3>
-                        </div>
-                        <p class="card-text">Belajar mengenali ciri-ciri loker palsu dengan skenario interaktif</p>
-                    </button>
-                </div>
-            </div>
+  <!-- ============ PERIKSA: KONTRAK KERJA ============ -->
+  <section class="page page-check" data-route="/periksa/kontrak" data-check="kontrak">
+    <a class="back-btn" href="#/periksa" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="check-layout">
+      <div class="check-main">
+        <h1 class="check-title">Periksa Kontrak Kerja</h1>
+        <p class="check-desc">Unggah foto kontrak kerja (maks. 5 foto) untuk melihat klausul yang mungkin berat sebelah. Ini bukan nasihat hukum.</p>
+        <div class="input-card">
+          <span class="input-label">Foto kontrak</span>
+          <label class="dropzone" for="in-kontrak">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            <strong>Klik untuk memilih foto</strong>
+            <span>JPG / PNG, maks. 5 MB per foto</span>
+            <input id="in-kontrak" class="js-input" type="file" accept="image/*" multiple hidden>
+          </label>
+          <div class="thumbs"></div>
+          <p class="field-error" hidden></p>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary js-submit">Periksa Kontrak</button>
+            <button type="button" class="btn btn-outline js-clear">Hapus Foto</button>
+          </div>
         </div>
-    </main>
+      </div>
+      <aside class="result-card" aria-live="polite">
+        <h3>Hasil Pemeriksaan</h3>
+        <div class="result-body"></div>
+      </aside>
+    </div>
+  </section>
 
+  <!-- ============ MENU SIMULASI ============ -->
+  <section class="page page-sim-menu" data-route="/simulasi">
+    <a class="back-btn" href="#/" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="container wide">
+      <h1 class="menu-title center">Simulasi Apa Yang Mau Kamu Coba?</h1>
+      <div class="menu-grid">
+        <a class="menu-card sim-card" href="#/simulasi/lowongan">
+          <div class="menu-head"><img src="assets/img/icon-lowongan.png" alt=""><h3>Lowongan Kerja</h3></div>
+          <p>Simulasi tentang anda mendapat tawaran kerja yang menarik dan di iming-imingi banyak hal.</p>
+        </a>
+        <!-- Tiga skenario di bawah belum ada isinya: klik akan menampilkan "segera hadir".
+             Untuk mengaktifkan, tambahkan skenario di js/data.js lalu ganti href-nya, mis. href="#/simulasi/bank" -->
+        <a class="menu-card sim-card" href="#/simulasi" data-soon="Chat Dari Bank">
+          <div class="menu-head"><img src="assets/img/icon-bank.png" alt=""><h3>Chat Dari Bank</h3></div>
+          <p>Simulasi mendapat chat dari bank bahwa anda harus melakukan sesuatu agar bank anda tidak terblokir.</p>
+        </a>
+        <a class="menu-card sim-card" href="#/simulasi" data-soon="Hadiah Kaget">
+          <div class="menu-head"><img src="assets/img/icon-hadiah.png" alt=""><h3>Hadiah Kaget</h3></div>
+          <p>Simulasi mendapat hadiah dadakan namun harus mengikuti arahan penipu agar hadiah dapat di ambil.</p>
+        </a>
+        <a class="menu-card sim-card" href="#/simulasi" data-soon="Pengisian Formulir">
+          <div class="menu-head"><img src="assets/img/icon-formulir.png" alt=""><h3>Pengisian Formulir</h3></div>
+          <p>Simulasi ketika anda diminta untuk mengisi formulir yang bisa bersifat mengarah ke data pribadi.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIMULASI: CHAT LOWONGAN KERJA ============ -->
+  <section class="page page-sim" data-route="/simulasi/lowongan" data-scenario="lowongan">
+    <a class="back-btn" href="#/simulasi" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+    <div class="sim-head">
+      <h1>Simulasi Lowongan Kerja</h1>
+      <p>Simulasi ini menggunakan Chat fiktif untuk latihan dan bukan percakapan sungguhan</p>
+    </div>
+    <div class="sim-grid">
+      <div class="chat-panel">
+        <div class="chat-header"><span class="avatar"></span><strong class="chat-name">HR PT KECAP</strong></div>
+        <div class="chat-body" id="chatBody"></div>
+      </div>
+      <div class="answer-panel">
+        <h2 id="answerTitle">Pilih jawaban anda:</h2>
+        <div id="answerArea"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TENTANG (belum ada isi di Figma – teks contoh, silakan ganti) ============ -->
+  <section class="page page-content" data-route="/tentang">
+    <div class="container narrow">
+      <h1 class="menu-title center">Tentang Cekkan</h1>
+      <p class="lead">Cekkan membantu kamu mengenali tanda-tanda kejanggalan pada lowongan kerja yang beredar lewat WhatsApp dan media digital lainnya, sebelum kamu melamar atau membagikan data pribadi.</p>
+      <div class="info-grid">
+        <div class="info-card"><h3>Belajar lewat simulasi</h3><p>Latihan menghadapi “pemberi lowongan” fiktif lewat chat, supaya terbiasa tahu apa yang perlu ditanyakan.</p></div>
+        <div class="info-card"><h3>Periksa dengan alat bantu</h3><p>Tempel pesan, tautan, daftar persyaratan, atau foto kontrak, lalu lihat kejanggalan yang ditemukan.</p></div>
+        <div class="info-card"><h3>Bukan vonis</h3><p>Hasil Cekkan hanyalah alat bantu. Keputusan akhir tetap di tanganmu, dan selalu verifikasi lewat sumber resmi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PANDUAN (belum ada isi di Figma – teks contoh, silakan ganti) ============ -->
+  <section class="page page-content" data-route="/panduan">
+    <div class="container narrow">
+      <h1 class="menu-title center">Panduan Penggunaan</h1>
+      <p class="lead">Empat langkah singkat memakai Cekkan.</p>
+      <ol class="steps">
+        <li><strong>Pilih fitur.</strong> Mau berlatih lewat Simulasi, atau langsung Periksa sesuatu yang kamu terima.</li>
+        <li><strong>Masukkan datanya.</strong> Tempel pesan, tautan, atau daftar persyaratan. Untuk kontrak, unggah fotonya.</li>
+        <li><strong>Baca tanda yang ditemukan.</strong> Perhatikan tingkat risiko dan alasan di balik tiap tanda.</li>
+        <li><strong>Verifikasi sendiri.</strong> Cek ke situs resmi perusahaan, Disnaker, atau orang yang kamu percaya sebelum bertindak.</li>
+      </ol>
+      <h2 class="sub-title">Tanda yang sering muncul pada loker mencurigakan</h2>
+      <ul class="tips">
+        <li>Diminta transfer uang di awal (seragam, pelatihan, administrasi)</li>
+        <li>Gaji besar tanpa syarat pengalaman atau keahlian</li>
+        <li>Ditekan agar cepat memutuskan (“kuota tinggal 2 orang”)</li>
+        <li>Meminta OTP, PIN, atau kata sandi</li>
+        <li>Alamat kantor dan situs resmi tidak jelas, semua serba lewat chat</li>
+        <li>Mengarahkan ke tautan atau aplikasi yang tidak dikenal</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="page page-content" data-route="/faq">
+    <div class="container narrow">
+      <h1 class="menu-title center">Pertanyaan yang sering di ajukan</h1>
+      <p class="center sub-lead">Temukan jawaban atas pertanyaan seputar Cekkan</p>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Apa itu Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <p>Cekkan adalah alat bantu untuk mengenali tanda-tanda kejanggalan pada lowongan kerja, lewat simulasi interaktif dan fitur pemeriksaan pesan, tautan, persyaratan, dan kontrak.</p></details>
+        <details class="faq-item"><summary>Bagaimana cara menggunakan Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <p>Pilih Simulasi untuk berlatih, atau Periksa untuk menganalisis sesuatu yang kamu terima. Tempel atau unggah datanya, lalu baca tanda-tanda yang ditemukan.</p></details>
+        <details class="faq-item"><summary>Apa saja yang bisa diperiksa di Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <p>Pesan loker (teks), tautan lowongan, daftar dokumen dan persyaratan, serta foto kontrak kerja.</p></details>
+        <details class="faq-item"><summary>Apakah hasil Cekkan selalu akurat?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <p>Tidak selalu. Hasil hanya membantu menemukan kejanggalan dan bukan vonis mutlak bahwa suatu lowongan pasti penipuan atau pasti aman. Selalu verifikasi lewat sumber resmi.</p></details>
+        <details class="faq-item"><summary>Apakah data pribadi saya aman?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <!-- TODO: sesuaikan jawaban ini dengan kebijakan penyimpanan data yang sebenarnya di backend kamu -->
+          <p>Sebaiknya samarkan data sensitif (nomor KTP, nomor rekening, nomor telepon) sebelum menempelkan atau mengunggahnya. Cekkan hanya membutuhkan isi pesan atau dokumennya untuk membantu menemukan kejanggalan.</p></details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER (di Figma masih kosong – versi sederhana) ============ -->
+<footer class="footer">
+  <p>Cekkan adalah alat bantu, bukan vonis. Selalu verifikasi lowongan lewat sumber resmi.</p>
+  <p class="footer-links"><a href="#/tentang">Tentang</a> · <a href="#/panduan">Panduan</a> · <a href="#/faq">FAQ</a></p>
+  <p class="footer-copy">© 2026 Cekkan</p>
+</footer>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
