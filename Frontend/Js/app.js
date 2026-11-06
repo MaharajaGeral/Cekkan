@@ -245,7 +245,7 @@ function startSimulation(id) {
   const title = $(".answer-title", page);
   $(".chat-name", page).textContent = sc.contact;
   const steps = new Map(sc.steps.map(step => [step.id, step]));
-  const state = { score: 0, answered: 0 };
+  const state = { score: 0, answered: 0, followUpIndex: 0 };
 
   chat.replaceChildren(el("span", "date-chip", "Hari ini"));
   area.replaceChildren();
@@ -292,15 +292,21 @@ function startSimulation(id) {
     state.answered++;
     if (choice.good) state.score++;
 
+    const hasNextStep = choice.next || (
+      state.answered < sc.minAnswers &&
+      state.followUpIndex < sc.followUp.length
+    );
     const fb = el("div", `feedback ${choice.good ? "good" : "bad"}`);
     fb.append(el("h3", "", choice.good ? "Pilihan aman ✓" : "Perlu diwaspadai ✗"), el("p", "", choice.tip));
-    const next = el("button", "btn btn-primary", choice.next ? "Lanjut chat" : "Lihat hasil");
+    const next = el("button", "btn btn-primary", hasNextStep ? "Lanjut chat" : "Lihat hasil");
     next.type = "button";
     next.addEventListener("click", async () => {
       next.disabled = true;
       if (choice.reply && !(await hrSays(choice.reply))) return;
       if (choice.next) {
         runStep(choice.next);
+      } else if (state.answered < sc.minAnswers && state.followUpIndex < sc.followUp.length) {
+        runStep(sc.followUp[state.followUpIndex++]);
       } else {
         finish();
       }
