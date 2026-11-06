@@ -38,6 +38,9 @@ const NAMA_HALAMAN = {
   "/periksa/kontrak": "Kontrak Kerja",
   "/simulasi": "Simulasi",
   "/simulasi/lowongan": "Lowongan Kerja",
+  "/simulasi/bank": "Chat Dari Bank",
+  "/simulasi/hadiah": "Hadiah Kaget",
+  "/simulasi/formulir": "Pengisian Formulir",
   "/tentang": "Tentang",
   "/panduan": "Panduan",
   "/faq": "FAQ"
@@ -290,11 +293,14 @@ function shuffle(arr) {
 function startSimulation(id) {
   const sc = SIM_SCENARIOS[id];
   if (!sc) return;
+  const page = pages.find(p => p.dataset.scenario === id);
   const token = ++simToken;
-  const chat = $("#chatBody");
-  const area = $("#answerArea");
-  const title = $("#answerTitle");
-  const state = { step: 0, score: 0 };
+  const chat = $(".chat-body", page);
+  const area = $(".answer-area", page);
+  const title = $(".answer-title", page);
+  $(".chat-name", page).textContent = sc.contact;
+  const steps = new Map(sc.steps.map(step => [step.id, step]));
+  const state = { score: 0, answered: 0 };
 
   chat.replaceChildren(el("span", "date-chip", "Hari ini"));
   area.replaceChildren();
@@ -316,10 +322,13 @@ function startSimulation(id) {
     return true;
   }
 
-  async function runStep() {
-    const step = sc.steps[state.step];
+  async function runStep(stepId) {
+    const step = steps.get(stepId);
+    if (!step) {
+      throw new Error(`Langkah simulasi "${stepId}" tidak ditemukan pada skenario "${id}".`);
+    }
     area.replaceChildren();
-    title.textContent = "HR sedang mengetik…";
+    title.textContent = `${sc.contact} sedang mengetik…`;
     if (!(await hrSays(step.hr))) return;
     title.textContent = "Pilih jawaban anda:";
 
@@ -335,15 +344,21 @@ function startSimulation(id) {
   function pick(step, choice) {
     if (token !== simToken) return;
     bubble(choice.text, "me");
+    state.answered++;
     if (choice.good) state.score++;
 
     const fb = el("div", `feedback ${choice.good ? "good" : "bad"}`);
-    fb.append(el("h3", "", choice.good ? "Pilihan tepat ✓" : "Hati-hati ✗"), el("p", "", choice.tip));
-    const next = el("button", "btn btn-primary", state.step === sc.steps.length - 1 ? "Lihat hasil" : "Lanjut");
+    fb.append(el("h3", "", choice.good ? "Pilihan aman ✓" : "Perlu diwaspadai ✗"), el("p", "", choice.tip));
+    const next = el("button", "btn btn-primary", choice.next ? "Lanjut chat" : "Lihat hasil");
     next.type = "button";
-    next.addEventListener("click", () => {
-      state.step++;
-      state.step >= sc.steps.length ? finish() : runStep();
+    next.addEventListener("click", async () => {
+      next.disabled = true;
+      if (choice.reply && !(await hrSays(choice.reply))) return;
+      if (choice.next) {
+        runStep(choice.next);
+      } else {
+        finish();
+      }
     });
     fb.append(next);
     title.textContent = "Penjelasan";
@@ -352,12 +367,12 @@ function startSimulation(id) {
 
   function finish() {
     title.textContent = "Simulasi selesai";
-    const total = sc.steps.length;
+    const total = state.answered;
     const wrap = document.createDocumentFragment();
     wrap.append(el("div", "score", `${state.score}/${total}`));
     wrap.append(el("p", "center", state.score === total
-      ? "Mantap! Kamu jeli mengenali tanda-tandanya."
-      : "Terus berlatih. Perhatikan tanda bahaya berikut:"));
+      ? "Bagus, kamu berhasil mengenali semua tanda bahaya."
+      : "Tinjau lagi tanda-tanda yang muncul di percakapan tadi:"));
     const list = el("ul", "recap");
     sc.redflags.forEach(r => list.append(el("li", "", r)));
     wrap.append(list);
@@ -373,7 +388,7 @@ function startSimulation(id) {
     area.replaceChildren(wrap);
   }
 
-  runStep();
+  runStep(sc.start);
 }
 
 /* ---------- mulai ---------- */
