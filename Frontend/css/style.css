@@ -106,16 +106,6 @@ textarea::placeholder,.text-input::placeholder{color:#aaa}
 .btn:hover{filter:brightness(.93)}
 .btn:disabled{opacity:.6;cursor:wait}
 
-/* upload kontrak */
-.dropzone{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:12px;padding:30px 16px;border:2px dashed #9cc4ff;border-radius:20px;background:#f6faff;cursor:pointer;text-align:center;color:var(--blue-dark)}
-.dropzone:hover{background:#eaf3ff}
-.dropzone svg{width:38px;height:38px;fill:none;stroke:var(--blue);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.dropzone span{font-size:.85rem;color:#666}
-.thumbs{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
-.thumb{position:relative;width:92px;height:92px;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.thumb button{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:14px;line-height:1}
-
 /* ---------- Kartu hasil ---------- */
 .result-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:22px 26px 28px;min-height:520px}
 .result-card h3{color:#003fa0;font-weight:700;font-size:1.1rem;margin:0 0 18px 18px}

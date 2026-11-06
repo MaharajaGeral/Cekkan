@@ -217,61 +217,6 @@ function setupCheck(section) {
     });
   }
 
-  // upload kontrak
-  if (type === "kontrak") {
-    const thumbs = $(".thumbs", section);
-    const drawThumbs = () => {
-      thumbs.replaceChildren();
-      files.forEach((f, i) => {
-        const t = el("div", "thumb");
-        const img = document.createElement("img");
-        img.alt = f.name;
-        img.src = URL.createObjectURL(f);
-        img.onload = () => URL.revokeObjectURL(img.src);
-        const x = el("button", "", "×");
-        x.type = "button";
-        x.setAttribute("aria-label", "Hapus foto");
-        x.addEventListener("click", () => { files.splice(i, 1); drawThumbs(); });
-        t.append(img, x);
-        thumbs.append(t);
-      });
-    };
-    input.addEventListener("change", () => {
-      setError("");
-      for (const f of input.files) {
-        if (!f.type.startsWith("image/")) { setError("Hanya file gambar (JPG/PNG) yang bisa diunggah."); continue; }
-        if (f.size > 5 * 1024 * 1024) { setError(`“${f.name}” lebih dari 5 MB.`); continue; }
-        if (files.length >= 5) { setError("Maksimal 5 foto."); break; }
-        files.push(f);
-      }
-      input.value = "";
-      drawThumbs();
-    });
-    $(".js-clear", section).addEventListener("click", () => { files = []; drawThumbs(); setError(""); showEmpty(body); });
-  }
-
-  submit.addEventListener("click", async () => {
-    let payload;
-    if (type === "kontrak") {
-      if (!files.length) return setError("Unggah minimal satu foto kontrak.");
-      payload = new FormData();
-      files.forEach(f => payload.append("images", f));
-    } else {
-      const text = input.value.trim();
-      if (!text) return setError("Isi dulu bagian yang akan diperiksa.");
-      payload = { text };
-    }
-    setError("");
-    submit.disabled = true;
-    showLoading(body);
-    try {
-      renderResult(body, await analyze(type, payload));
-    } catch (e) {
-      showError(body, e.message || "Terjadi kesalahan. Coba lagi.");
-    } finally {
-      submit.disabled = false;
-    }
-  });
 }
 $$("[data-check]").forEach(setupCheck);
 
