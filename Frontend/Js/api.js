@@ -20,9 +20,8 @@
    }
    ========================================================== */
 
-const DEMO_MODE = true;
-const API_BASE_URL = ""; // contoh: "https://api.cekkan.id"
-
+const DEMO_MODE = false;
+const API_BASE_URL = "http://localhost:3000";
 async function analyze(type, payload) {
   if (!DEMO_MODE) {
     const isForm = payload instanceof FormData;
@@ -31,7 +30,11 @@ async function analyze(type, payload) {
       headers: isForm ? {} : { "Content-Type": "application/json" },
       body: isForm ? payload : JSON.stringify(payload)
     });
-    if (!res.ok) throw new Error("Pemeriksaan gagal. Coba lagi sebentar.");
+        if (!res.ok) {
+      let msg = "Pemeriksaan gagal. Coba lagi sebentar.";
+      try { const j = await res.json(); if (j && j.error) msg = j.error; } catch {}
+      throw new Error(msg);
+    }
     return res.json();
   }
   await new Promise(r => setTimeout(r, 900));
