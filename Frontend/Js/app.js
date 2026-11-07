@@ -215,8 +215,30 @@ function setupCheck(section) {
       input.dispatchEvent(new Event("input"));
       setError("");
     });
-  }
+    // tombol periksa
+  submit.addEventListener("click", async () => {
+    const text = input.value.trim();
 
+    // kolom tidak boleh kosong
+    if (!text) {
+      setError("Isi dulu sebelum diperiksa.");
+      return;
+    }
+    setError("");
+
+    submit.disabled = true;
+    showLoading(body);
+
+    try {
+      const hasil = await analyze(type, { text: text });
+      renderResult(body, hasil);
+    } catch (e) {
+      showError(body, "Pemeriksaan gagal. Coba lagi sebentar.");
+    }
+
+    submit.disabled = false;
+  });
+  }
 }
 $$("[data-check]").forEach(setupCheck);
 
