@@ -29,7 +29,6 @@
 </header>
 
 <main>
-<main>
   
   <nav class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb" hidden></nav>
 
@@ -100,6 +99,7 @@
           <textarea id="in-pesan" class="js-input" maxlength="3000" rows="8"
             placeholder="Contoh: “Buka loker Junior Programmer. Gaji 15 juta/bulan tanpa pengalaman, bekerja secara remote, dan jam kerja hanya 1 jam/hari . Transfer biaya seragam Rp1.500.000 hari ini, kuota terbatas. Kunjungi http:xxx untuk konfirmasi."></textarea>
           <p class="field-error" hidden></p>
+          <p class="ai-note">Teks yang kamu masukkan akan dikirim ke layanan AI pihak ketiga untuk dianalisis. Hindari menulis data pribadi seperti nama lengkap, alamat, nomor KTP, rekening, atau OTP/PIN. Kami berusaha menyamarkan email, nomor telepon, dan angka panjang, tetapi tidak semuanya bisa terdeteksi.</p>
           <div class="btn-row">
             <button type="button" class="btn btn-primary js-submit">Periksa Pesan</button>
             <button type="button" class="btn btn-outline js-sample">Coba Contoh Pesan</button>
@@ -125,6 +125,7 @@
           <label class="input-label" for="in-tautan">Tautan yang akan diperiksa</label>
           <input id="in-tautan" class="js-input text-input" type="text" inputmode="url" maxlength="2000" placeholder="Contoh: https://contoh-perusahaan.com/karir">
           <p class="field-error" hidden></p>
+          <p class="ai-note">Alamat tautan yang kamu masukkan akan dianalisis dan hasilnya dikirim ke layanan AI pihak ketiga. Cekkan tidak membuka tautan itu. Hindari tautan yang memuat data pribadi atau kode rahasia di dalamnya.</p>
           <div class="btn-row">
             <button type="button" class="btn btn-primary js-submit">Periksa Tautan</button>
             <button type="button" class="btn btn-outline js-sample">Coba Contoh Tautan</button>
@@ -151,6 +152,7 @@
           <textarea id="in-dokumen" class="js-input" maxlength="5000" rows="8"
             placeholder="Contoh:&#10;CV&#10;Fotokopi KTP&#10;Foto selfie sambil memegang KTP&#10;Nomor rekening dan PIN ATM&#10;Biaya administrasi Rp300.000"></textarea>
           <p class="field-error" hidden></p>
+          <p class="ai-note">Teks yang kamu masukkan akan dikirim ke layanan AI pihak ketiga untuk dianalisis. Hindari menulis data pribadi seperti nama lengkap, alamat, nomor KTP, rekening, atau OTP/PIN. Kami berusaha menyamarkan email, nomor telepon, dan angka panjang, tetapi tidak semuanya bisa terdeteksi.</p>
           <div class="btn-row">
             <button type="button" class="btn btn-primary js-submit">Periksa Persyaratan</button>
             <button type="button" class="btn btn-outline js-sample">Coba Contoh Daftar</button>
@@ -311,14 +313,13 @@
         <details class="faq-item"><summary>Apa itu Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
           <p>Cekkan adalah alat bantu untuk mengenali tanda-tanda kejanggalan pada lowongan kerja, lewat simulasi interaktif dan fitur pemeriksaan pesan, tautan dan persyaratan.</p></details>
         <details class="faq-item"><summary>Bagaimana cara menggunakan Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
-          <p>Pilih Simulasi untuk berlatih, atau Periksa untuk menganalisis sesuatu yang kamu terima. Tempel atau unggah datanya, lalu baca tanda-tanda yang ditemukan.</p></details>
+          <p>Pilih Simulasi untuk berlatih, atau Periksa untuk menganalisis sesuatu yang kamu terima. Tempel datanya, lalu baca tanda-tanda yang ditemukan.</p></details>
         <details class="faq-item"><summary>Apa saja yang bisa diperiksa di Cekkan?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
           <p>Pesan loker (teks), tautan lowongan,serta daftar dokumen dan persyaratan.</p></details>
         <details class="faq-item"><summary>Apakah hasil Cekkan selalu akurat?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
-          <p>Tidak selalu. Hasil hanya membantu menemukan kejanggalan dan bukan vonis mutlak bahwa suatu lowongan pasti penipuan atau pasti aman. Selalu verifikasi lewat sumber resmi.</p></details>
-        <details class="faq-item"><summary>Apakah data pribadi saya aman?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
-          <!-- TODO: sesuaikan jawaban ini dengan kebijakan penyimpanan data yang sebenarnya di backend kamu -->
-          <p>Sebaiknya samarkan data sensitif (nomor KTP, nomor rekening, nomor telepon) sebelum menempelkan atau mengunggahnya. Cekkan hanya membutuhkan isi pesan atau dokumennya untuk membantu menemukan kejanggalan.</p></details>
+          <p>Tidak selalu. Analisis dibuat oleh AI yang bisa keliru. Hasil hanya membantu menemukan kejanggalan dan bukan vonis mutlak bahwa suatu lowongan pasti penipuan atau pasti aman. Selalu verifikasi lewat sumber resmi.</p></details>
+        <details class="faq-item"><summary>Data apa yang dikirim ke AI, dan apakah aman?<svg viewBox="0 0 24 24"><path d="m4 9 8 7 8-7"/></svg></summary>
+          <p>Pemeriksaan di Cekkan dibantu AI. Teks yang kamu masukkan (pesan, daftar persyaratan, atau alamat tautan) dikirim lewat server Cekkan ke layanan AI pihak ketiga, saat ini Google Gemini, untuk dianalisis. Sebelum dikirim, kami berusaha menyamarkan alamat email, nomor telepon, dan angka panjang seperti nomor KTP atau rekening, tetapi nama, alamat, dan data lain yang ditulis biasa tidak ikut disamarkan. Server Cekkan tidak menyimpan isi yang kamu masukkan, namun penyedia AI dapat memproses data tersebut sesuai kebijakannya sendiri. Karena itu, jangan memasukkan data pribadi atau rahasia (nomor KTP, rekening, OTP, PIN, kata sandi), dan samarkan sendiri bagian yang sensitif sebelum menempelkan.</p></details>
       </div>
     </div>
   </section>
