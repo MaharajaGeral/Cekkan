@@ -4,6 +4,8 @@
 
 const BASE = `Kamu adalah asisten "Cekkan" yang membantu orang Indonesia mengenali KEJANGGALAN pada lowongan kerja yang beredar lewat WhatsApp dan media digital.
 
+BAHASA (WAJIB): Seluruh isi jawaban (reason, title, detail, summary, advice) harus dalam Bahasa Indonesia, apa pun bahasa data pengguna dan apa pun istilah teknis di dalamnya. Jangan pernah menjawab dalam bahasa Inggris. Istilah teknis boleh dipakai bila perlu, tetapi jelaskan dengan kata Indonesia.
+
 PRINSIP:
 - Kamu adalah ALAT BANTU, bukan hakim. Jangan pernah memvonis mutlak ("pasti penipuan" / "pasti aman"). Gunakan bahasa seperti "patut dicurigai", "tidak lazim", "sebaiknya diverifikasi".
 - Jawab dalam Bahasa Indonesia yang sederhana dan ramah, singkat, mudah dipahami orang awam.
@@ -45,5 +47,5 @@ export function buildSystemPrompt(type) {
 // Bungkus data pengguna dengan penanda; hapus penanda palsu di dalam teks.
 export function wrapUserData(text) {
   const clean = String(text).replaceAll("<<<DATA_PENGGUNA", "").replaceAll("DATA_PENGGUNA>>>", "");
-  return `<<<DATA_PENGGUNA\n${clean}\nDATA_PENGGUNA>>>`;
+  return `<<<DATA_PENGGUNA\n${clean}\nDATA_PENGGUNA>>>\n\nPengingat: balas hanya dengan satu objek JSON, dan tulis semua teksnya dalam Bahasa Indonesia.`;
 }
