@@ -36,11 +36,7 @@ const NAMA_HALAMAN = {
   "/periksa/tautan": "Tautan Lowongan",
   "/periksa/dokumen": "Dokumen Persyaratan",
   "/periksa/kontrak": "Kontrak Kerja",
-  "/simulasi": "Simulasi",
-  "/simulasi/lowongan": "Lowongan Kerja",
-  "/simulasi/bank": "Chat Dari Bank",
-  "/simulasi/hadiah": "Hadiah Kaget",
-  "/simulasi/formulir": "Pengisian Formulir",
+  "/simulasi": "Simulasi Lowongan Kerja",
   "/tentang": "Tentang",
   "/panduan": "Panduan",
   "/faq": "FAQ"
@@ -90,7 +86,8 @@ function tampilkanBreadcrumb(path, page) {
 }
 
 function route() {
-  const path = location.hash.replace(/^#/, "") || "/";
+  const requestedPath = location.hash.replace(/^#/, "") || "/";
+  const path = requestedPath === "/simulasi/lowongan" ? "/simulasi" : requestedPath;
   const page = pages.find(p => p.dataset.route === path) || pages.find(p => p.dataset.route === "/");
   const current = page.dataset.route;
 
@@ -357,9 +354,9 @@ function startSimulation(id) {
     const again = el("button", "btn btn-outline", "Ulangi");
     again.type = "button";
     again.addEventListener("click", () => startSimulation(id));
-    const other = el("a", "btn btn-primary", "Simulasi lain");
-    other.href = "#/simulasi";
-    row.append(again, other);
+    const home = el("a", "btn btn-primary", "Kembali ke beranda");
+    home.href = "#/";
+    row.append(again, home);
     wrap.append(row);
     area.replaceChildren(wrap);
   }

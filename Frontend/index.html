@@ -40,7 +40,7 @@
       <h1 class="home-title">Selamat Datang di Cekkan</h1>
       <h2 class="home-sub">CEK DULU SEBELUM LAMAR</h2>
       <p class="home-text">Kenali Risiko Penipuan dalam Proses Rekrutmen.</p>
-      <p class="home-text">Pelajari modus penipuan melalui simulasi interaktif, atau periksa pesan rekrutmen, tautan lowongan dan persyaratan dokumen untuk mengenali indikasi risiko sebelum mengambil keputusan.</p>
+      <p class="home-text">Pelajari modus penipuan lowongan kerja melalui simulasi chat interaktif, atau periksa pesan rekrutmen, tautan lowongan dan persyaratan dokumen untuk mengenali indikasi risiko sebelum mengambil keputusan.</p>
       <p class="home-text">Pilih ikon fitur di bawah dan klik untuk memulai!</p>
 
       <div class="feature-cards">
@@ -58,7 +58,7 @@
             <img src="assets/ikon_simulasi.svg" alt="">
             <h3>Simulasi</h3>
           </div>
-          <p>Belajar mengenali ciri-ciri loker palsu dengan skenario interaktif</p>
+          <p>Belajar mengenali ciri-ciri loker palsu melalui chat simulasi</p>
         </a>
       </div>
     </div>
@@ -166,98 +166,15 @@
     </div>
   </section>
 
-  <!-- ============ MENU SIMULASI ============ -->
-  <section class="page page-menu page-sim-menu" data-route="/simulasi">
-    <a class="back-btn" href="#/" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
-    <div class="container wide">
-      <h1 class="menu-title">Simulasi Apa Yang Mau Kamu Coba?</h1>
-      <div class="menu-grid">
-        <a class="menu-card" href="#/simulasi/lowongan">
-          <div class="menu-head"><img src="assets/ikon_lowongankerja.svg" alt=""><h3>Lowongan Kerja</h3></div>
-          <p>Simulasi tentang anda mendapat tawaran kerja yang menarik dan di iming-imingi banyak hal.</p>
-        </a>
-        <a class="menu-card" href="#/simulasi/bank">
-          <div class="menu-head"><img src="assets/ikon_chatbank.svg" alt=""><h3>Chat Dari Bank</h3></div>
-          <p>Simulasi mendapat chat dari bank bahwa anda harus melakukan sesuatu agar bank anda tidak terblokir.</p>
-        </a>
-        <a class="menu-card" href="#/simulasi/hadiah">
-          <div class="menu-head"><img src="assets/ikon_hadiahkaget.svg" alt=""><h3>Hadiah Kaget</h3></div>
-          <p>Simulasi mendapat hadiah dadakan namun harus mengikuti arahan penipu agar hadiah dapat di ambil.</p>
-        </a>
-        <a class="menu-card" href="#/simulasi/formulir">
-          <div class="menu-head"><img src="assets/ikon_formulir.svg" alt=""><h3>Pengisian Formulir</h3></div>
-          <p>Simulasi ketika anda diminta untuk mengisi formulir yang bisa bersifat mengarah ke data pribadi.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ SIMULASI: CHAT LOWONGAN KERJA ============ -->
-  <section class="page page-sim" data-route="/simulasi/lowongan" data-scenario="lowongan">
-    <a class="back-btn" href="#/simulasi" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
+  <section class="page page-sim" data-route="/simulasi" data-scenario="lowongan">
+    <a class="back-btn" href="#/" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
     <div class="check-layout">
       <div class="check-main">
         <h1 class="check-title">Simulasi Lowongan Kerja</h1>
         <p class="check-desc">Simulasi ini menggunakan Chat fiktif untuk latihan dan bukan percakapan sungguhan</p>
         <div class="chat-panel">
           <div class="chat-header"><img class="avatar" src="./assets/avatar-mira.svg?v=2" alt="Ilustrasi profil fiktif perekrut berkemeja dan blazer"><strong class="chat-name">Rekrutmen</strong></div>
-          <div class="chat-body"></div>
-        </div>
-      </div>
-      <aside class="result-card answer-panel" aria-live="polite">
-        <h3 class="answer-title">Pilih jawaban anda:</h3>
-        <div class="answer-area"></div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ============ SIMULASI: CHAT DARI BANK ============ -->
-  <section class="page page-sim" data-route="/simulasi/bank" data-scenario="bank">
-    <a class="back-btn" href="#/simulasi" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
-    <div class="check-layout">
-      <div class="check-main">
-        <h1 class="check-title">Simulasi Chat Dari Bank</h1>
-        <p class="check-desc">Simulasi ini menggunakan chat fiktif untuk latihan dan bukan percakapan sungguhan</p>
-        <div class="chat-panel">
-          <div class="chat-header"><img class="avatar" src="./assets/avatar-layanan.svg?v=2" alt="Ilustrasi profil fiktif petugas layanan dengan headset"><strong class="chat-name">Layanan Nasabah</strong></div>
-          <div class="chat-body"></div>
-        </div>
-      </div>
-      <aside class="result-card answer-panel" aria-live="polite">
-        <h3 class="answer-title">Pilih jawaban anda:</h3>
-        <div class="answer-area"></div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ============ SIMULASI: HADIAH KAGET ============ -->
-  <section class="page page-sim" data-route="/simulasi/hadiah" data-scenario="hadiah">
-    <a class="back-btn" href="#/simulasi" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
-    <div class="check-layout">
-      <div class="check-main">
-        <h1 class="check-title">Simulasi Hadiah Kaget</h1>
-        <p class="check-desc">Simulasi ini menggunakan chat fiktif untuk latihan dan bukan percakapan sungguhan</p>
-        <div class="chat-panel">
-          <div class="chat-header"><img class="avatar" src="./assets/avatar-hadiah.svg?v=2" alt="Ilustrasi profil fiktif bertema hadiah dengan topi pesta"><strong class="chat-name">Panitia Hadiah</strong></div>
-          <div class="chat-body"></div>
-        </div>
-      </div>
-      <aside class="result-card answer-panel" aria-live="polite">
-        <h3 class="answer-title">Pilih jawaban anda:</h3>
-        <div class="answer-area"></div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ============ SIMULASI: PENGISIAN FORMULIR ============ -->
-  <section class="page page-sim" data-route="/simulasi/formulir" data-scenario="formulir">
-    <a class="back-btn" href="#/simulasi" aria-label="Kembali"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></a>
-    <div class="check-layout">
-      <div class="check-main">
-        <h1 class="check-title">Simulasi Pengisian Formulir</h1>
-        <p class="check-desc">Simulasi ini menggunakan chat fiktif untuk latihan dan bukan percakapan sungguhan</p>
-        <div class="chat-panel">
-          <div class="chat-header"><img class="avatar" src="./assets/avatar-pendataan.svg?v=2" alt="Ilustrasi profil fiktif petugas pendataan dengan rompi dan clipboard"><strong class="chat-name">Admin Pendataan</strong></div>
           <div class="chat-body"></div>
         </div>
       </div>
