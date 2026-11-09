@@ -1,9 +1,4 @@
-/* ==========================================================
-   CEKKAN – app.js
-   1. Router (hash)   2. Halaman Periksa   3. Simulasi chat
-   ========================================================== */
-
-/* ---------- helper ---------- */
+/* helper */
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -24,9 +19,7 @@ function toast(msg) {
   toastTimer = setTimeout(() => (t.hidden = true), 2400);
 }
 
-/* ==========================================================
-   1. ROUTER
-   ========================================================== */
+/* 1. ROUTER */
 const pages = $$(".page");
 
 // nama tiap halaman untuk breadcrumb
@@ -110,9 +103,7 @@ $$("[data-soon]").forEach(a =>
   })
 );
 
-/* ==========================================================
-   2. HALAMAN PERIKSA
-   ========================================================== */
+/* 2. HALAMAN PERIKSA */
 const ICON_WARN =
   '<svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v5M12 17.5v.5"/></svg>';
 const LEVEL_LABEL = { tinggi: "Tinggi", sedang: "Sedang", rendah: "Rendah" };
@@ -364,5 +355,5 @@ function startSimulation(id) {
   runStep(sc.start);
 }
 
-/* ---------- mulai ---------- */
+/* mulai */
 route();
