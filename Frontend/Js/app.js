@@ -28,7 +28,6 @@ const NAMA_HALAMAN = {
   "/periksa/pesan": "Pesan Loker",
   "/periksa/tautan": "Tautan Lowongan",
   "/periksa/dokumen": "Dokumen Persyaratan",
-  "/periksa/kontrak": "Kontrak Kerja",
   "/simulasi": "Simulasi Lowongan Kerja",
   "/tentang": "Tentang",
   "/panduan": "Panduan",
@@ -185,7 +184,6 @@ function setupCheck(section) {
   const submit = $(".js-submit", section);
   const err = $(".field-error", section);
   const counter = $(".js-count", section);
-  let files = []; // khusus kontrak
 
   showEmpty(body);
 

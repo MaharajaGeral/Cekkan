@@ -68,18 +68,6 @@ const DEMO_RULES = {
 };
 
 function mockAnalyze(type, payload) {
-  if (type === "kontrak") {
-    return {
-      level: "sedang",
-      flags: [
-        { title: "Penalti keluar sangat besar", detail: "Contoh temuan demo: klausul denda jika berhenti sebelum masa kontrak habis." },
-        { title: "Jam kerja dan lembur tidak dirinci", detail: "Contoh temuan demo: tidak ada batas jam kerja dan upah lembur." },
-        { title: "Masa percobaan tidak jelas", detail: "Contoh temuan demo: tidak disebutkan durasi dan hak selama percobaan." }
-      ],
-      summary: "Ini hasil contoh untuk menguji tampilan. Analisis kontrak sebenarnya akan muncul setelah backend terhubung.",
-      advice: ["Baca ulang seluruh klausul sebelum tanda tangan.", "Minta salinan kontrak untuk dibawa pulang.", "Konsultasikan ke Disnaker atau LBH bila ada klausul yang berat sebelah."]
-    };
-  }
   const text = (payload && payload.text) || "";
   const flags = (DEMO_RULES[type] || [])
     .filter(([re]) => re.test(text))
