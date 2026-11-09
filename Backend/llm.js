@@ -7,9 +7,10 @@
 // ==========================================================
 
 export class HttpError extends Error {
-  constructor(status, message) {
+  constructor(status, message, extra = {}) {
     super(message);
     this.status = status;
+    this.extra = extra; // data tambahan untuk frontend, mis. { redirect: "dokumen" }
   }
 }
 
@@ -32,7 +33,7 @@ export async function askLLM({ system, userText }) {
       { role: "user", content: userText }
     ],
     temperature: 0.2,   // rendah = lebih konsisten
-    max_tokens: 4096    // cukup besar agar JSON tidak terpotong
+    max_tokens: 8192    // cukup besar agar JSON (dan proses berpikir model) tidak terpotong
   };
   // Mode JSON (didukung Gemini & DeepSeek). Jika suatu penyedia menolaknya,
   // set LLM_JSON_MODE=false di .env.
@@ -69,7 +70,9 @@ async function callOnce(base, key, body) {
     }
 
     const data = await res.json();
-    return (data?.choices?.[0]?.message?.content || "").trim();
+    const choice = data?.choices?.[0];
+    if (choice?.finish_reason === "length") console.warn("[llm] jawaban terpotong: naikkan max_tokens di llm.js");
+    return (choice?.message?.content || "").trim();
   } catch (e) {
     if (e instanceof HttpError) throw e;
     if (e.name === "AbortError") throw new HttpError(504, "AI terlalu lama merespons. Coba lagi.");
@@ -82,9 +85,12 @@ async function callOnce(base, key, body) {
 
 // ---------- Bersihkan & validasi balasan AI (jangan percaya mentah-mentah) ----------
 const LEVELS = ["rendah", "sedang", "tinggi"];
+const KINDS = ["pesan_lengkap", "daftar_persyaratan", "tautan", "lainnya"];
+const STATUSES = ["wajar", "waspada", "berbahaya"];
 const str = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+const norm = v => String(v ?? "").toLowerCase().trim();
 
-/** @returns {{level:string, flags:{title:string,detail:string}[], summary:string, advice:string[]}} */
+/** @returns {{level:string, input_kind:string, flags:{title:string,detail:string}[], items:{item:string,status:string,reason:string}[], summary:string, advice:string[]}} */
 export function parseResult(raw) {
   let obj;
   try {
@@ -108,15 +114,21 @@ export function parseResult(raw) {
     .map(f => ({ title: str(f?.title, 120), detail: str(f?.detail, 400) }))
     .filter(f => f.title);
 
+  const items = (Array.isArray(obj.items) ? obj.items : [])
+    .slice(0, 25)
+    .map(i => ({ item: str(i?.item, 200), status: STATUSES.includes(norm(i?.status)) ? norm(i.status) : "waspada", reason: str(i?.reason, 300) }))
+    .filter(i => i.item);
+
   const advice = (Array.isArray(obj.advice) ? obj.advice : [])
     .slice(0, 6)
     .map(a => str(a, 300))
     .filter(Boolean);
 
-  let level = LEVELS.includes(obj.level) ? obj.level : "sedang";
-  // Pengaman konsistensi: tidak boleh "rendah" jika banyak tanda, dan sebaliknya
+  let level = LEVELS.includes(norm(obj.level)) ? norm(obj.level) : "sedang";
+  // Pengaman konsistensi dengan jumlah tanda yang ditampilkan
+  if (flags.length === 0) level = "rendah";
   if (flags.length >= 4 && level === "rendah") level = "sedang";
-  if (flags.length === 0 && level === "tinggi") level = "sedang";
 
-  return { level, flags, summary: str(obj.summary, 800), advice };
+  const input_kind = KINDS.includes(norm(obj.input_kind)) ? norm(obj.input_kind) : "lainnya";
+  return { level, input_kind, flags, items, summary: str(obj.summary, 800), advice };
 }

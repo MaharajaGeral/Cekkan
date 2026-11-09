@@ -233,7 +233,10 @@ function setupCheck(section) {
       const hasil = await analyze(type, { text: text });
       renderResult(body, hasil);
     } catch (e) {
-      showError(body, "Pemeriksaan gagal. Coba lagi sebentar.");
+      const msg = e instanceof TypeError
+        ? "Tidak bisa terhubung ke server. Pastikan backend menyala dan alamat web diizinkan."
+        : e.message;
+      showError(body, msg || "Pemeriksaan gagal. Coba lagi sebentar.");
     }
 
     submit.disabled = false;

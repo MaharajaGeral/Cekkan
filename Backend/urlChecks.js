@@ -49,20 +49,23 @@ export function analyzeUrl(input) {
   const findings = [];
 
   findings.push(hasScheme ? `Protokol: ${url.protocol.replace(":", "")}` : "Protokol tidak ditulis pada tautan (diasumsikan http)");
-  if (url.protocol === "http:") findings.push("TIDAK memakai HTTPS (tidak terenkripsi)");
+  if (hasScheme && url.protocol === "http:") findings.push("TIDAK memakai HTTPS (tidak terenkripsi)");
   if (isIp) findings.push("Memakai alamat IP, bukan nama domain");
   if (SHORTENERS.some(s => host === s || host.endsWith(`.${s}`))) findings.push("Merupakan tautan pendek / tautan ke aplikasi chat; tujuan sebenarnya tersembunyi");
   if (RISKY_TLDS.includes(tld)) findings.push(`Ekstensi domain .${tld} sering dipakai situs sekali pakai`);
   if (host.includes("xn--")) findings.push("Mengandung punycode (bisa menyamarkan huruf mirip)");
-  if (labels.length - reg.split(".").length >= 2) findings.push(`Subdomain bertingkat (${labels.length} bagian) pada ${host}`);
-  if ((host.match(/-/g) || []).length >= 2) findings.push("Nama domain mengandung banyak tanda hubung");
-  if ((host.match(/\d/g) || []).length >= 3) findings.push("Nama domain mengandung banyak angka");
+  if (!isIp && labels.length - reg.split(".").length >= 2) findings.push(`Subdomain bertingkat (${labels.length} bagian) pada ${host}`);
+  if (!isIp && (host.match(/-/g) || []).length >= 2) findings.push("Nama domain mengandung banyak tanda hubung");
+  if (!isIp && (host.match(/\d/g) || []).length >= 3) findings.push("Nama domain mengandung banyak angka");
   if (url.username || url.password) findings.push("Tautan memuat nama pengguna/kata sandi di alamat (teknik penyamaran)");
   const bait = BAIT_WORDS.filter(w => host.includes(w));
   if (bait.length) findings.push(`Nama domain memuat kata pancingan: ${bait.join(", ")}`);
 
+  const tokens = host.split(/[.-]/); // "career-bca.com" -> career, bca, com
   for (const [brand, official] of Object.entries(BRANDS)) {
-    if (host.includes(brand) && !official.includes(reg)) {
+    // merek pendek (<=4 huruf) harus cocok utuh agar "brilliance"/"grabcad" tidak salah tuduh
+    const hit = brand.length <= 4 ? tokens.includes(brand) : tokens.some(t => t.includes(brand));
+    if (hit && !official.includes(reg)) {
       findings.push(`Menyebut "${brand}" tetapi domainnya bukan domain resmi (${official.join(" / ")})`);
     }
   }
