@@ -99,7 +99,8 @@ main{position:relative}
 
 /* ---------- Halaman periksa ---------- */
 .page-check{padding:20px 0 70px}
-.check-layout{max-width:1200px;margin:0 auto;padding:60px 28px 0;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:start}
+.check-layout{max-width:1200px;margin:0 auto;padding:60px 28px 0;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:start}
+.check-layout>*{min-width:0}
 .check-title{font-weight:800;font-size:clamp(1.8rem,3vw,2.5rem);color:#003fa0;margin-top:20px}
 .check-desc{font-size:1.15rem;color:#444;margin:20px 0 38px;max-width:620px}
 .input-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:22px 30px 34px}
@@ -146,6 +147,10 @@ textarea::placeholder,.text-input::placeholder{color:#aaa}
 
 /* ---------- Simulasi chat (disamakan dengan halaman Periksa) ---------- */
 .page-sim{padding:20px 0 70px}
+.page-sim .check-layout{row-gap:0}
+.page-sim .check-main{display:contents}
+.page-sim .check-title,.page-sim .check-desc{grid-column:1/-1;text-align:center}
+.page-sim .check-desc{margin:12px auto 24px}
 .chat-panel{height:560px;display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:22px;box-shadow:var(--shadow)}
 .chat-header{display:flex;align-items:center;gap:12px;padding:12px 26px;background:#fff;border-bottom:1px solid #dbe9f5;font-weight:700;color:#003fa0;font-size:1.05rem}
 .avatar{display:block;width:44px;height:44px;aspect-ratio:1;border-radius:50%;object-fit:cover;flex:none;background:#d9e8ef;border:2px solid #cddffb}
@@ -158,11 +163,11 @@ textarea::placeholder,.text-input::placeholder{color:#aaa}
 .typing i{width:8px;height:8px;border-radius:50%;background:#9ab;animation:blink 1s infinite}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 @keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
-.answer-panel{min-height:560px}
+.page-sim .answer-panel{min-height:560px}
 .answer-title{color:#003fa0;font-weight:700;font-size:1.1rem;margin:0 0 18px 18px}
 .option{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;margin-bottom:14px;text-align:left}
 .option .letter{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:1.1rem;display:grid;place-items:center}
-.option .opt-text{flex:1;background:#fff;color:#222;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.18);padding:11px 16px;font-size:.95rem;transition:transform .15s}
+.option .opt-text{flex:1;min-width:0;overflow-wrap:anywhere;background:#fff;color:#222;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.18);padding:11px 16px;font-size:.95rem;transition:transform .15s}
 .option:hover .opt-text{transform:translateX(3px)}
 .feedback{background:#fff;color:#222;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.18);padding:16px 18px;font-size:.92rem}
 .feedback.good{border-left:6px solid #1fae5b}
@@ -208,6 +213,7 @@ textarea::placeholder,.text-input::placeholder{color:#aaa}
   .check-layout{grid-template-columns:1fr}
   .check-layout{padding-top:80px}
   .result-card,.answer-panel{min-height:0}
+  .page-sim .answer-panel{margin-top:0}
   .chat-panel{height:480px}
   .info-grid{grid-template-columns:1fr}
   .home-watermark{opacity:.2;right:-10%;width:70vw}
