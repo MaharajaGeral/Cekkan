@@ -220,7 +220,7 @@ function setupCheck(section) {
       renderResult(body, hasil);
     } catch (e) {
       const msg = e instanceof TypeError
-        ? "Tidak bisa terhubung ke server. Pastikan backend menyala dan alamat web diizinkan."
+        ? "Tidak bisa terhubung ke server. Coba lagi sebentar."
         : e.message;
       showError(body, msg || "Pemeriksaan gagal. Coba lagi sebentar.");
     }
