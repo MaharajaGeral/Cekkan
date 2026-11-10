@@ -7,8 +7,31 @@ import { buildSystemPrompt, wrapUserData } from "./prompts.js";
 import { analyzeUrl } from "./urlChecks.js";
 
 const DAILY_LIMIT = Number(process.env.DAILY_LIMIT || 300);
-const ALLOWED = (process.env.ALLOWED_ORIGINS || "http://127.0.0.1:5500,http://localhost:5500")
-  .split(",").map(s => s.trim()).filter(Boolean);
+
+const defaultOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "http://localhost:5173",
+  "https://cekkan-frontend.vercel.app"
+];
+
+const envOrigins = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map(s => s.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
+
+const ALLOWED = Array.from(new Set([...defaultOrigins, ...envOrigins]));
+
+function isOriginAllowed(origin) {
+  if (!origin) return true; // request non-browser (misal: curl, mobile apps, server-to-server)
+  const clean = origin.trim().replace(/\/+$/, "");
+  if (ALLOWED.includes(clean)) return true;
+  // Izinkan juga preview deployment Vercel untuk cekkan-frontend
+  if (/^https:\/\/cekkan-frontend(-[a-z0-9-]+)?\.vercel\.app$/i.test(clean)) return true;
+  return false;
+}
 
 for (const k of ["LLM_BASE_URL", "LLM_API_KEY", "LLM_MODEL"]) {
   if (!process.env[k]) console.warn(`⚠️  ${k} belum diisi di file .env — pemeriksaan akan gagal.`);
@@ -20,8 +43,9 @@ app.set("trust proxy", 1); // agar batas per-IP benar saat di balik proxy hostin
 
 // ---------- CORS: hanya website kamu yang boleh memanggil ----------
 app.use(cors({
-  origin: (origin, cb) => (!origin || ALLOWED.includes(origin) ? cb(null, true) : cb(new HttpError(403, "Origin tidak diizinkan."))),
-  methods: ["GET", "POST"]
+  origin: (origin, cb) => (isOriginAllowed(origin) ? cb(null, true) : cb(new HttpError(403, "Origin tidak diizinkan."))),
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(express.json({ limit: "50kb" }));
 
