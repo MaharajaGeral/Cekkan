@@ -5,7 +5,7 @@
 Pernah menerima pesan "Selamat, kamu lolos seleksi!" padahal tidak pernah melamar? Cekkan membantu pencari kerja mengenali kejanggalan pada lowongan kerja sebelum terlanjur membagikan data atau mengirim uang.
 
 - Website: https://cekkan-frontend.vercel.app
-- Video demo: [ISI: tautan video demo]
+- Video demo: https://drive.google.com/drive/folders/1f2CaQuWWRZCF41nOsW11-Yxoh5h7Ue7B?usp=sharing
 
 ---
 
