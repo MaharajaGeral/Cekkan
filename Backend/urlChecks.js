@@ -1,9 +1,3 @@
-// ==========================================================
-// urlChecks.js – pemeriksaan teknis alamat tautan.
-// PENTING: server TIDAK membuka/mengunduh tautan (menghindari SSRF dan
-// menghindari server terkena situs berbahaya). Hanya membedah teks alamatnya.
-// ==========================================================
-
 const SHORTENERS = ["bit.ly", "tinyurl.com", "s.id", "cutt.ly", "t.co", "rebrand.ly", "is.gd", "shorturl.at", "wa.me", "t.me", "linktr.ee"];
 const RISKY_TLDS = ["xyz", "top", "click", "icu", "site", "online", "shop", "cfd", "sbs", "buzz", "work", "live", "vip", "monster"];
 const BAIT_WORDS = ["gaji", "bonus", "hadiah", "klaim", "gratis", "promo", "slot"];

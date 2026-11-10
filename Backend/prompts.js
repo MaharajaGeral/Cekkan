@@ -59,8 +59,6 @@ export function buildSystemPrompt(type) {
   return `${BASE}\n\n${TASKS[type]}`;
 }
 
-// Bungkus data pengguna dengan penanda; hapus penanda palsu di dalam teks
-// (diulang sampai bersih, agar penanda tidak bisa dirakit ulang dari potongan).
 export function wrapUserData(text) {
   let clean = String(text);
   const marker = /<<<DATA_PENGGUNA|DATA_PENGGUNA>>>/g;

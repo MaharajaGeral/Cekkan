@@ -1,8 +1,3 @@
-// ==========================================================
-// server.js – backend Cekkan
-//   POST /api/check/pesan | tautan | dokumen   body JSON {"text": "..."}
-//   GET  /health
-// ==========================================================
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
