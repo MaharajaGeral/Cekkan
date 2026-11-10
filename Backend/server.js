@@ -6,7 +6,6 @@ import { askLLM, parseResult, HttpError } from "./llm.js";
 import { buildSystemPrompt, wrapUserData } from "./prompts.js";
 import { analyzeUrl } from "./urlChecks.js";
 
-const PORT = process.env.PORT || 3000;
 const DAILY_LIMIT = Number(process.env.DAILY_LIMIT || 300);
 const ALLOWED = (process.env.ALLOWED_ORIGINS || "http://127.0.0.1:5500,http://localhost:5500")
   .split(",").map(s => s.trim()).filter(Boolean);
@@ -125,4 +124,4 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: "Terjadi kesalahan pada server." });
 });
 
-app.listen(PORT, () => console.log(`Cekkan backend jalan di http://localhost:${PORT}`));
+export default app;
