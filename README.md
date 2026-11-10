@@ -56,9 +56,18 @@ Simulasi chat interaktif dengan skenario lowongan pekerjaan fiktif. Kamu memilih
 - Cekkan tidak membuka tautan yang kamu tempel. Jangan membukanya sebelum yakin aman.
 
 ### Kalau muncul pesan gagal
-| Pesan | Artinya | Yang bisa dilakukan |
+
+Pesan muncul di kotak hasil. Ini artinya dan yang bisa kamu lakukan:
+
+| Pesan yang muncul | Artinya | Yang bisa dilakukan |
 |---|---|---|
-| Terlalu banyak permintaan | Batas pemakaian per pengguna tercapai | Tunggu beberapa menit |
-| Kuota pemeriksaan hari ini habis | Batas harian seluruh pengguna tercapai | Coba lagi besok |
-| Layanan AI sedang ramai atau AI terlalu lama merespons | Layanan AI sedang sibuk | Coba lagi sebentar lagi |
-| Data tidak bisa diperiksa | Isi tidak sesuai fitur yang dipilih | Pastikan yang ditempel memang pesan, tautan, atau daftar persyaratan |
+| Isi dulu sebelum diperiksa / Isi dulu bagian yang akan diperiksa | Kolom masih kosong | Tempel teks atau klik **Coba Contoh** |
+| Teks terlalu panjang (maks ... karakter) | Isi melebihi batas | Persingkat, atau periksa per bagian |
+| Terlalu banyak permintaan | Batas 15 pemeriksaan per 10 menit tercapai | Tunggu beberapa menit |
+| Kuota pemeriksaan hari ini sudah habis | Batas harian seluruh pengguna tercapai | Coba lagi besok |
+| Layanan AI sedang ramai / AI terlalu lama merespons / Layanan AI sedang bermasalah / Tidak dapat terhubung ke layanan AI | Layanan AI sedang sibuk atau tidak merespons | Tunggu sebentar, lalu coba lagi |
+| AI tidak memberikan jawaban / Jawaban AI tidak bisa dibaca | AI membalas dengan format yang tidak terbaca | Coba lagi, atau ubah sedikit isinya |
+| Data yang kamu masukkan tidak bisa diperiksa (atau penjelasan singkat dari AI) | Isi tidak sesuai fitur yang dipilih | Pastikan yang ditempel memang pesan lowongan, tautan, atau daftar persyaratan |
+| Tidak bisa terhubung ke server | Koneksi internetmu terputus, atau server Cekkan sedang tidak tersedia | Cek koneksi, lalu coba lagi. Kalau berulang, kabari tim |
+| Server belum dikonfigurasi / API key ditolak / Model atau alamat AI tidak ditemukan / Permintaan ke AI ditolak | Masalah pengaturan di sisi server, bukan kesalahanmu | Hubungi tim pengembang |
+| Pemeriksaan gagal. Coba lagi sebentar. | Kesalahan umum | Coba lagi |
