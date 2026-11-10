@@ -21,7 +21,7 @@
    ========================================================== */
 
 const DEMO_MODE = false;
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://cekkan-backend.vercel.app";
 async function analyze(type, payload) {
   if (!DEMO_MODE) {
     const isForm = payload instanceof FormData;
